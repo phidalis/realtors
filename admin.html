@@ -52,6 +52,11 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
           <span>Agents</span>
         </a>
+        <a href="#users" data-section="users" data-title="Users">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Users</span>
+          <span class="nav-count" id="nav-count-users" hidden></span>
+        </a>
         <div class="nav-label">System</div>
         <a href="#settings" data-section="settings" data-title="Settings">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -257,6 +262,22 @@
           </div>
         </section>
 
+        <!-- ================= USERS ================= -->
+        <section class="dash-section" id="users">
+          <div class="panel">
+            <div class="panel-head">
+              <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Registered users</h3>
+            </div>
+            <div class="panel-body">
+              <p class="dash-hint">Accounts created on the site. Deactivate to block sign-in, or promote a client to admin. You can't change your own account.</p>
+              <div class="table-wrap">
+                <table class="dash-table" id="users-table"></table>
+              </div>
+              <p class="dash-hint" id="users-empty" hidden>No registered accounts yet. Users appear when someone signs up.</p>
+            </div>
+          </div>
+        </section>
+
         <!-- ================= SETTINGS ================= -->
         <section class="dash-section" id="settings">
           <div class="panel">
@@ -275,13 +296,15 @@
               </form>
               <div class="panel" style="margin-top:24px">
                 <div class="panel-head"><h3>Registered users</h3></div>
-                <div class="panel-body"><div id="users-list"></div></div>
+                <div class="panel-body">
+                  <p class="dash-hint" style="margin-bottom:12px">Manage accounts, deactivate users and change roles.</p>
+                  <a href="#users" data-section="users" data-title="Users" class="btn btn-primary btn-sm">Manage users</a>
+                </div>
               </div>
               <div class="panel" style="margin-top:24px">
                 <div class="panel-head"><h3 style="color:var(--red)">Danger zone</h3></div>
                 <div class="panel-body">
-                  <p class="dash-hint" style="margin-bottom:12px">Reset the site back to the original demo property set. Your added and edited properties will be removed.</p>
-                  <button class="btn btn-danger btn-sm" id="btn-reset-data">Reset demo data</button>
+                  <p class="dash-hint" style="margin-bottom:12px">Deleting a property removes it permanently from the site. Edits and deletions are saved instantly to Firestore.</p>
                 </div>
               </div>
             </div>
@@ -292,6 +315,10 @@
     </div>
   </div>
 
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
   <script src="site.js"></script>
 </body>
 </html>

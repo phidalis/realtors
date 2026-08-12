@@ -29,7 +29,7 @@
       <form id="signup-form" class="auth-form" novalidate>
         <div class="field"><label>Full name</label><input name="name" required placeholder="Jane Smith"></div>
         <div class="field"><label>Email</label><input type="email" name="email" required placeholder="you@email.com"></div>
-        <div class="field"><label>Password</label><input type="password" name="password" required placeholder="••••••••" minlength="6"></div>
+        <div class="field"><label>Password</label><div class="password-field"><input type="password" name="password" required placeholder="••••••••" minlength="6"><button type="button" class="password-toggle" aria-label="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div>
         <button class="btn btn-primary btn-block" type="submit">Create Account</button>
       </form>
 
@@ -42,33 +42,51 @@
     <span class="auth-footer-links"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a></span>
   </footer>
 
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
   <script src="site.js"></script>
   <script>
     (function () {
-      const D = window.Dash || {};
+      'use strict';
+      const F = window.Firebase;
 
-      function registerUser(u) {
-        if (!D.getStore || !D.setStore) return;
-        const users = D.getStore('realtor_users');
-        if (!users.some(function (x) { return String(x.email || '').toLowerCase() === String(u.email || '').toLowerCase(); })) {
-          users.push({ email: u.email, name: u.name, role: u.role, at: Date.now() });
-          D.setStore('realtor_users', users);
-        }
-      }
-      function go(u) {
-        registerUser(u);
-        if (D.saveUser) D.saveUser(u);
-        location.href = u.role === 'admin' ? 'admin.html' : 'client.html';
-      }
-      function fallback(email, name) {
-        return { name: name || 'Guest', email: email || '', role: 'client', at: Date.now() };
+      function friendly(code) {
+        const map = {
+          'auth/email-already-in-use': 'An account already exists for that email. Sign in instead.',
+          'auth/invalid-email': 'Enter a valid email address.',
+          'auth/weak-password': 'Password must be at least 6 characters.',
+          'auth/network-request-failed': 'Network error — check your connection and try again.',
+        };
+        return map[code] || ('Could not create account: ' + (code || 'unknown error'));
       }
 
       document.getElementById('signup-form').addEventListener('submit', function (e) {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target).entries());
-        const u = D.makeUser ? D.makeUser(data.email, data.name, data.password) : fallback(data.email, data.name);
-        go(u);
+        const btn = e.target.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Creating account…'; }
+        F.signUp((data.email || '').trim(), data.password || '').then(function () {
+          const rec = Object.assign({}, F.userState.record, {
+            name: (data.name || '').trim() || (data.email || '').split('@')[0],
+          });
+          F.userState.record = rec;
+          return F.db.collection('users').doc(F.userState.user.uid).set(rec, { merge: true });
+        }).then(function () {
+          location.href = 'client.html';
+        }).catch(function (err) {
+          var errEl = document.getElementById('auth-error');
+          if (!errEl) {
+            errEl = document.createElement('p');
+            errEl.id = 'auth-error';
+            errEl.className = 'auth-reset-msg auth-err';
+            document.getElementById('signup-form').insertBefore(errEl, document.getElementById('signup-form').firstChild);
+          }
+          errEl.textContent = friendly(err && err.code);
+          errEl.hidden = false;
+          if (btn) { btn.disabled = false; btn.textContent = 'Create Account'; }
+        });
       });
     })();
   </script>

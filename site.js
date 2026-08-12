@@ -2,44 +2,45 @@
    Shared data for the real estate site (no build, plain JS)
    ========================================================= */
 
-const U = (id, w) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=70`;
+/* Site content, listings, contacts and agents are all stored in Firestore
+   (see firebase-config.js). No hard-coded demo data lives in this file. */
+
+const CONTACT_FALLBACK = {
+  name: 'Realty Homes',
+  email: '',
+  phone: '',
+};
+
+const AGENT_FALLBACK = {
+  name: 'Realty Homes', title: '', photo: '', phone: '', email: '', whatsapp: '',
+  rating: 0, homesSold: 0, years: 0, intro: '',
+};
 
 const IMAGES = {
-  hero: U('1600585154340-be6161a56a0c', 2000),
-  cta: U('1600596542815-ffad4c1539a9', 1600),
-  agent: U('1560250097-0b93528c311a', 800),
+  hero: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=70',
 };
 
+/* Sample images used by the admin property picker (same set the seeder uses). */
 const HOUSE_IMGS = [
-  '1600585154340-be6161a56a0c', '1600607687939-ce8a6c25118c', '1600566753190-17f0baa2a6c3',
-  '1600047509807-ba8f99d2cdde', '1600047509358-9dc75507daeb', '1600596542815-ffad4c1539a9',
-  '1600585152220-90363fe7e115', '1580587771525-78b9dba3b914', '1564013799919-ab600027ffc6',
-  '1512917774080-9991f1c4c750', '1523217582562-09d0def993a6', '1583608205776-bfd35f0d9f83',
-  '1568605114967-8130f3a36994', '1570129477492-45c003edd2be', '1560448204-e02f11c3d0e2',
-  '1560185007-cde436f6a4d0', '1600585154526-990dced4db0d', '1600607687920-4e2a09cf159d',
-  '1600566753086-00f18fb6b3ea', '1484154218962-a197022b5858',
+  '1600585154340-be6161a56a0c',
+  '1600607687939-ce8a6c25118c',
+  '1600566753190-17f0baa2a6c3',
+  '1600047509807-ba8f99d2cdde',
+  '1600047509358-9dc75507daeb',
+  '1600596542815-ffad4c1539a9',
+  '1600585152220-90363fe7e115',
+  '1502672260266-1c1ef2d93688',
 ];
+const U = (id, w) => 'https://images.unsplash.com/photo-' + id + '?auto=format&fit=crop&w=' + (w || 800) + '&q=70';
 
-const AGENT = {
-  name: 'Sarah Mitchell',
-  title: 'Senior Real Estate Advisor',
-  photo: IMAGES.agent,
-  years: 12,
-  phone: '+1 (555) 123-4567',
-  whatsapp: '15551234567',
-  email: 'sarah@realtyhomes.com',
-  rating: 4.9,
-  homesSold: 340,
-  intro: 'Sarah has helped hundreds of families find their perfect home across the region. Known for honest advice, tireless negotiation and a personal touch on every single deal.',
-};
+function primaryAgent() {
+  return (window.Dash && window.Dash.getPrimaryAgent)
+    ? window.Dash.getPrimaryAgent() : AGENT_FALLBACK;
+}
 
-const SOCIAL = {
-  facebook: 'https://facebook.com',
-  instagram: 'https://instagram.com',
-  tiktok: 'https://tiktok.com',
-  linkedin: 'https://linkedin.com',
-  whatsapp: 'https://wa.me/15551234567',
-};
+function primaryAgentEmail() {
+  return primaryAgent().email || '';
+}
 
 const SVG = (inner, fill) =>
   `<svg viewBox="0 0 24 24" fill="${fill ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
@@ -51,6 +52,8 @@ const ICONS = {
   search: SVG('<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>'),
   heart: SVG('<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>'),
   heartFill: SVG('<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>', true),
+  eye: SVG('<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>'),
+  eyeOff: SVG('<path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/>'),
   bed: SVG('<path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8"/><path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><path d="M2 17h20"/><path d="M6 13v1"/><path d="M18 13v1"/>'),
   bath: SVG('<path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><path d="M10 5 8 7"/><path d="M2 12h20"/><path d="M6 12V5a2 2 0 0 1 4 0v3"/><path d="M6 19v1"/><path d="M18 19v1"/>'),
   area: SVG('<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>'),
@@ -84,84 +87,75 @@ const ICONS = {
 
 /* ---------------- Property builder ---------------- */
 
-const rawProps = [
-  { title: 'Modern Lakeside Villa', type: 'Villa', status: 'sale', category: 'luxury', price: 1850000, address: '14 Lakeshore Drive', city: 'Lakeview', state: 'CA', zip: '90210', beds: 5, baths: 6, area: 5200, yearBuilt: 2021, lotSize: 1.2, pool: true, garden: true, views: 1284, featured: true, img: '1600585154340-be6161a56a0c', desc: 'A stunning modern villa on the lakefront with floor-to-ceiling glass, a private infinity pool and panoramic water views from every room.' },
-  { title: 'Cozy Downtown Apartment', type: 'Apartment', status: 'rent', category: 'residential', price: 1950, address: '221 Sunset Blvd', city: 'Riverside', state: 'CA', zip: '90211', beds: 2, baths: 1, area: 850, yearBuilt: 2016, pool: false, garden: false, furnished: true, views: 542, featured: true, img: '1600607687939-ce8a6c25118c', desc: 'Sunny, fully furnished apartment in the heart of downtown, steps from cafes, transit and nightlife. Perfect for young professionals.' },
-  { title: 'Family Suburban House', type: 'House', status: 'sale', category: 'residential', price: 620000, address: '78 Maplewood Ave', city: 'Greenfield', state: 'CA', zip: '90212', beds: 4, baths: 3, area: 2800, yearBuilt: 2014, lotSize: 0.3, garden: true, pets: true, views: 876, featured: true, img: '1600566753190-17f0baa2a6c3', desc: 'A warm and welcoming family home in a top school district with a big fenced yard, deck and an open-concept kitchen.' },
-  { title: 'Waterfront Estate', type: 'House', status: 'sale', category: 'luxury', price: 3400000, address: '1 Beacon Point', city: 'Bayview', state: 'CA', zip: '90213', beds: 6, baths: 7, area: 7800, yearBuilt: 2019, lotSize: 2.5, pool: true, garden: true, views: 2011, featured: true, img: '1600047509807-ba8f99d2cdde', desc: 'An architectural masterpiece on the water with private dock, resort-style pool, wine cellar and a home theater.' },
-  { title: 'Modern Loft Condo', type: 'Condo', status: 'sale', category: 'residential', price: 410000, address: '9 Gallery Row', city: 'Riverside', state: 'CA', zip: '90214', beds: 2, baths: 2, area: 1200, yearBuilt: 2018, garden: false, views: 489, featured: true, img: '1600047509358-9dc75507daeb', desc: 'Industrial-chic loft with 12-ft ceilings, exposed brick, and a private balcony overlooking the arts district.' },
-  { title: 'Downtown Skyline Penthouse', type: 'Apartment', status: 'rent', category: 'luxury', price: 7200, address: '100 Tower Plaza', city: 'Riverside', state: 'CA', zip: '90215', beds: 3, baths: 3, area: 2100, yearBuilt: 2020, pool: true, furnished: true, views: 1643, featured: true, img: '1600596542815-ffad4c1539a9', desc: 'Sky-high luxury living with wraparound city views, rooftop pool, concierge service and a chef’s kitchen.' },
-  { title: 'Charming Craftsman Bungalow', type: 'House', status: 'sale', category: 'residential', price: 380000, address: '32 Willow Lane', city: 'Greenfield', state: 'CA', zip: '90216', beds: 3, baths: 2, area: 1600, yearBuilt: 2008, lotSize: 0.18, garden: true, pets: true, views: 356, featured: true, img: '1600585152220-90363fe7e115', desc: 'A picture-perfect bungalow with original hardwood floors, a renovated kitchen and a lush private garden.' },
-  { title: 'Hillside Ranch Retreat', type: 'House', status: 'sale', category: 'residential', price: 450000, address: '58 Cactus Ridge', city: 'Valley Heights', state: 'CA', zip: '90217', beds: 3, baths: 2, area: 1900, yearBuilt: 2012, lotSize: 1.0, garden: true, views: 768, featured: true, img: '1502672260266-1c1ef2d93688', desc: 'A relaxed ranch-style home perched on a ridge with sweeping hillside views, a wraparound porch and room to roam.' },
-  { title: 'Office Complex', type: 'Commercial', status: 'rent', category: 'commercial', price: 8500, address: '455 Business Park', city: 'Commerce City', state: 'CA', zip: '90218', beds: 0, baths: 3, area: 5000, yearBuilt: 2011, parking: true, views: 214, desc: 'Versatile open-plan office complex with on-site parking, meeting rooms and high-speed fiber internet ready.' },
-  { title: '5-Acre Country Land', type: 'Land', status: 'sale', category: 'land', price: 240000, address: 'County Road 22', city: 'Cedar Falls', state: 'CA', zip: '90219', beds: 0, baths: 0, area: 0, yearBuilt: 0, lotSize: 5.0, views: 198, desc: 'Beautiful, cleared 5-acre parcel with mature oaks, seasonal creek and utilities at the road. Endless possibilities.' },
-  { title: 'Lakeview Family Home', type: 'House', status: 'sale', category: 'residential', price: 715000, address: '11 Emerald Circle', city: 'Lakeview', state: 'CA', zip: '90220', beds: 4, baths: 3, area: 3100, yearBuilt: 2017, lotSize: 0.4, pool: true, garden: true, pets: true, views: 934, desc: 'Family-friendly home with a sparkling pool, open living spaces and a sunny breakfast nook with lake glimpses.' },
-  { title: 'Arts District Studio', type: 'Apartment', status: 'rent', category: 'residential', price: 1250, address: '77 Canvas Street', city: 'Riverside', state: 'CA', zip: '90221', beds: 1, baths: 1, area: 550, yearBuilt: 2019, garden: false, furnished: true, views: 301, desc: 'Bright, artsy studio steps from galleries and cafés. Ideal for creatives who love city living.' },
-  { title: 'Colonial Style House', type: 'House', status: 'sale', category: 'residential', price: 895000, address: '180 Heritage Dr', city: 'Old Town', state: 'CA', zip: '90222', beds: 5, baths: 4, area: 3600, yearBuilt: 2013, lotSize: 0.5, garden: true, pets: true, views: 1120, desc: 'Classic colonial elegance with grand staircase, formal dining, study and a landscaped backyard oasis.' },
-  { title: 'Garden Condo', type: 'Condo', status: 'sale', category: 'residential', price: 350000, address: '5 Botanic Court', city: 'Greenfield', state: 'CA', zip: '90223', beds: 2, baths: 2, area: 1150, yearBuilt: 2015, garden: true, views: 277, desc: 'Ground-floor condo opening onto a shared garden, with modern finishes and a quiet, community feel.' },
-  { title: 'Luxury Penthouse Duplex', type: 'Apartment', status: 'sale', category: 'luxury', price: 2950000, address: '200 Crown Tower', city: 'Riverside', state: 'CA', zip: '90224', beds: 4, baths: 5, area: 4100, yearBuilt: 2022, pool: true, garden: false, views: 1750, desc: 'A duplex penthouse with two terraces, private elevator entrance and jaw-dropping skyline views.' },
-  { title: 'Retail Plaza Unit', type: 'Commercial', status: 'rent', category: 'commercial', price: 12000, address: '66 Market Square', city: 'Commerce City', state: 'CA', zip: '90225', beds: 0, baths: 2, area: 6200, yearBuilt: 2009, parking: true, views: 156, desc: 'Prime high-foot-traffic retail space in a bustling plaza with large storefront windows and ample parking.' },
-  { title: 'Wooded Acreage', type: 'Land', status: 'sale', category: 'land', price: 310000, address: 'Forest Trail Rd', city: 'Cedar Falls', state: 'CA', zip: '90226', beds: 0, baths: 0, area: 0, yearBuilt: 0, lotSize: 12.0, views: 145, desc: '12 acres of private, tree-lined land with gentle slopes and a natural spring — perfect for a retreat or hobby farm.' },
-  { title: 'Modern Townhouse', type: 'Townhouse', status: 'sale', category: 'residential', price: 475000, address: '24 Urban Walk', city: 'Riverside', state: 'CA', zip: '90227', beds: 3, baths: 3, area: 1800, yearBuilt: 2020, garden: false, views: 431, desc: 'Sleek three-level townhouse with rooftop terrace, attached garage and easy access to downtown.' },
-  { title: 'Beachfront Bungalow', type: 'House', status: 'sale', category: 'luxury', price: 1250000, address: '9 Sand Dollar Way', city: 'Bayview', state: 'CA', zip: '90228', beds: 3, baths: 2, area: 2000, yearBuilt: 2016, lotSize: 0.22, garden: true, pets: true, views: 1430, desc: 'Steps from the sand, this bungalow offers ocean breezes, a fire pit patio and classic beach-town charm.' },
-  { title: 'Quiet Garden Apartment', type: 'Apartment', status: 'rent', category: 'residential', price: 1600, address: '44 Rosewood Ct', city: 'Greenfield', state: 'CA', zip: '90229', beds: 2, baths: 1, area: 900, yearBuilt: 2013, garden: true, pets: true, views: 388, desc: 'Peaceful garden apartment with a private patio, washer/dryer and plenty of natural light.' },
-  { title: 'Craftsman Family Home', type: 'House', status: 'sale', category: 'residential', price: 585000, address: '130 Elm Street', city: 'Old Town', state: 'CA', zip: '90230', beds: 4, baths: 3, area: 2600, yearBuilt: 2011, lotSize: 0.28, garden: true, pets: true, views: 657, desc: 'Charming craftsman home with a finished basement, fireplaces and a sunny eat-in kitchen.' },
-  { title: 'Industrial Warehouse', type: 'Commercial', status: 'sale', category: 'commercial', price: 1400000, address: '880 Foundry Ave', city: 'Commerce City', state: 'CA', zip: '90231', beds: 0, baths: 4, area: 15000, yearBuilt: 2005, parking: true, views: 121, desc: 'Spacious industrial warehouse with 20-ft clearance, three dock doors and heavy-power infrastructure.' },
-  { title: 'Modern Family Home', type: 'House', status: 'sale', category: 'residential', price: 789000, address: '2 Crestline Way', city: 'Valley Heights', state: 'CA', zip: '90232', beds: 4, baths: 4, area: 3000, yearBuilt: 2024, lotSize: 0.35, pool: false, garden: true, views: 289, desc: 'Brand-new smart home with energy-efficient systems, quartz finishes and a 10-year warranty.' },
-  { title: 'Suburban Rental House', type: 'House', status: 'rent', category: 'residential', price: 2200, address: '410 Meadow Lane', city: 'Greenfield', state: 'CA', zip: '90233', beds: 3, baths: 2, area: 1400, yearBuilt: 2015, lotSize: 0.2, garden: true, pets: true, views: 512, desc: 'Comfortable family rental in a quiet neighborhood with a fenced backyard and garage.' },
-  { title: 'Executive Villa with Pool', type: 'Villa', status: 'sale', category: 'luxury', price: 2250000, address: '33 Palm Court', city: 'Bayview', state: 'CA', zip: '90234', beds: 5, baths: 5, area: 4800, yearBuilt: 2020, lotSize: 0.8, pool: true, garden: true, views: 1105, desc: 'Resort living at home — infinity pool, outdoor kitchen, spa and a grand great room with vaulted ceilings.' },
-  { title: 'Open Land with Views', type: 'Land', status: 'sale', category: 'land', price: 190000, address: 'Lookout Point Rd', city: 'Cedar Falls', state: 'CA', zip: '90235', beds: 0, baths: 0, area: 0, yearBuilt: 0, lotSize: 4.0, views: 89, desc: 'Sun-drenched 4-acre lot with unobstructed valley views, ideal for a custom hillside home.' },
-  { title: 'Boutique Hotel Building', type: 'Commercial', status: 'sale', category: 'commercial', price: 3200000, address: '500 Harbor Blvd', city: 'Bayview', state: 'CA', zip: '90236', beds: 12, baths: 12, area: 9000, yearBuilt: 2008, parking: true, views: 178, desc: 'Fully operating boutique hotel with 12 suites, harbor views and strong seasonal income history.' },
-  { title: 'Cottage by the Park', type: 'House', status: 'rent', category: 'residential', price: 1750, address: '18 Parkview Rd', city: 'Lakeview', state: 'CA', zip: '90237', beds: 2, baths: 1, area: 1000, yearBuilt: 1998, lotSize: 0.15, garden: true, pets: true, views: 402, desc: 'Sweet cottage directly across from the park — perfect for small families and pet owners.' },
-];
+/* Properties are read from Firestore; the admin dashboard persists them there. */
+const PROPERTIES = [];
+const __deletedPropIds = [];
 
-const PROPERTIES = rawProps.map((p, i) => {
-  const primary = p.img || HOUSE_IMGS[i % HOUSE_IMGS.length];
-  const imgs = [primary, HOUSE_IMGS[(i + 1) % HOUSE_IMGS.length], HOUSE_IMGS[(i + 2) % HOUSE_IMGS.length]];
-  const defaults = {
-    id: i + 1,
-    type: 'House', status: 'sale', category: 'residential',
-    price: 500000, address: '123 Main St', city: 'Springfield', state: 'CA', zip: '90210',
-    beds: 3, baths: 2, area: 1800, yearBuilt: 2010, lotSize: 0.25,
-    parking: true, pool: false, garden: true, pets: true, furnished: false,
-    views: 0, featured: false,
-    desc: 'A beautiful, well-maintained property in a sought-after neighborhood.',
-  };
-  return Object.assign(defaults, p, { img: primary, imgs, primary });
-});
+function loadPropsIntoMemory() {
+  PROPERTIES.length = 0;
+  const list = window.Firebase ? window.Firebase.props.list : [];
+  PROPERTIES.push.apply(PROPERTIES, list);
+}
+
+function savePropsToFirestore() {
+  const F = window.Firebase;
+  if (!F) return Promise.resolve();
+  const batch = F.db.batch();
+  PROPERTIES.forEach((p) => {
+    batch.set(F.db.collection('properties').doc(String(p.id)), p);
+  });
+  __deletedPropIds.forEach((id) => {
+    batch.delete(F.db.collection('properties').doc(String(id)));
+  });
+  __deletedPropIds.length = 0;
+  return batch.commit().catch((e) => console.error('Failed to save properties:', e));
+}
+
+function recordDeletedProp(id) {
+  if (__deletedPropIds.indexOf(id) === -1) __deletedPropIds.push(id);
+}
+
+/* Boot pages only after Firebase (auth + data) is ready. */
+function whenFirebase(cb) {
+  const F = window.Firebase;
+  if (!F || typeof F.init !== 'function') { if (cb) cb(); return; }
+  F.init().then(() => {
+    loadPropsIntoMemory();
+    if (window.Dash && typeof window.Dash.onData === 'function') window.Dash.onData();
+    if (cb) cb();
+  }).catch(() => { if (cb) cb(); });
+}
 
 /* Helpers used across pages */
 function formatPrice(p) {
   return p.status === 'rent' ? '$' + p.price.toLocaleString() + '/mo' : '$' + p.price.toLocaleString();
 }
 
-function favoritesKey() {
-  try {
-    const u = JSON.parse(localStorage.getItem('realtor_user') || 'null');
-    if (u && u.email) return 'realtor_favorites:' + String(u.email).toLowerCase();
-  } catch (e) { /* ignore */ }
-  return 'realtor_favorites';
+function currentEmail() {
+  const S = window.Firebase && window.Firebase.userState;
+  const r = S && S.record;
+  return r && r.email ? String(r.email).toLowerCase() : '';
 }
 
 function getFavorites() {
-  const key = favoritesKey();
-  try {
-    const list = JSON.parse(localStorage.getItem(key) || '[]');
-    if (key !== 'realtor_favorites') {
-      const guest = JSON.parse(localStorage.getItem('realtor_favorites') || '[]');
-      if (guest.length) {
-        const merged = Array.from(new Set(guest.concat(list)));
-        localStorage.setItem(key, JSON.stringify(merged));
-        localStorage.setItem('realtor_favorites', '[]');
-        return merged;
-      }
-    }
-    return list;
-  } catch (e) { return []; }
+  const email = currentEmail();
+  if (email) {
+    const m = window.Firebase.store.getObj('favorites', {});
+    return Array.isArray(m[email]) ? m[email].slice() : [];
+  }
+  try { return JSON.parse(localStorage.getItem('realtor_favorites') || '[]'); } catch (e) { return []; }
 }
 
 function saveFavorites(list) {
-  localStorage.setItem(favoritesKey(), JSON.stringify(list));
+  const email = currentEmail();
+  if (email) {
+    const m = window.Firebase.store.getObj('favorites', {});
+    m[email] = Array.isArray(list) ? list.slice() : [];
+    window.Firebase.store.set('favorites', m);
+    window.Firebase.store.commit();
+  } else {
+    localStorage.setItem('realtor_favorites', JSON.stringify(list));
+  }
 }
 
 function toggleFavorite(id) {
@@ -177,19 +171,6 @@ function propCoords(p) {
   const lng = -74.25 + ((seed % 800) / 10000) * 3;
   return { lat, lng };
 }
-
-/* Apply admin-saved properties (added/edited/deleted from the admin dashboard).
-   The admin dashboard persists the full working set under 'realtor_admin_props'.
-   An empty array means the admin deleted every listing, so it is applied too. */
-(function () {
-  try {
-    const saved = JSON.parse(localStorage.getItem('realtor_admin_props') || 'null');
-    if (Array.isArray(saved)) {
-      PROPERTIES.length = 0;
-      PROPERTIES.push(...saved);
-    }
-  } catch (e) { /* ignore storage errors */ }
-})();
 
 
 /* ---------------- next module ---------------- */
@@ -209,9 +190,25 @@ function propCoords(p) {
       ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   }
   function getStore(key) {
+    if (key === 'realtor_users') {
+      const F = window.Firebase;
+      return (F && F.usersCache) ? F.usersCache.list.slice() : [];
+    }
+    if (key === 'realtor_leads' || key === 'realtor_viewings' || key === 'realtor_messages') {
+      return window.Firebase ? window.Firebase.store.getArray(key) : [];
+    }
     try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch (e) { return []; }
   }
-  function setStore(key, list) { localStorage.setItem(key, JSON.stringify(list)); }
+  function setStore(key, list) {
+    if (key === 'realtor_leads' || key === 'realtor_viewings' || key === 'realtor_messages') {
+      if (!window.Firebase) return;
+      window.Firebase.store.set(key, list);
+      window.Firebase.store.commit();
+      return;
+    }
+    if (key === 'realtor_users') return; /* users live in the users/{uid} collection */
+    localStorage.setItem(key, JSON.stringify(list));
+  }
   function initials(name) {
     return String(name || '?').split(/\s+/).filter(Boolean).slice(0, 2)
       .map((w) => w[0].toUpperCase()).join('');
@@ -247,27 +244,53 @@ function propCoords(p) {
     toastTimer = setTimeout(() => { el.className = 'dash-toast'; }, 2800);
   }
 
-  /* ---------------- Auth ---------------- */
+  /* ---------------- Auth (Firebase) ---------------- */
   function currentUser() {
-    try { return JSON.parse(localStorage.getItem('realtor_user') || 'null'); } catch (e) { return null; }
+    const S = window.Firebase && window.Firebase.userState;
+    return (S && S.record) || null;
   }
-  function saveUser(u) { localStorage.setItem('realtor_user', JSON.stringify(u)); }
+  function saveUser(updated) {
+    const S = window.Firebase;
+    if (!S || !S.userState.user) return;
+    if (S.userState.record) {
+      Object.assign(S.userState.record, updated || {});
+    } else {
+      S.userState.record = Object.assign({}, updated || {});
+    }
+    S.db.collection('users').doc(S.userState.user.uid)
+      .set(S.userState.record, { merge: true })
+      .catch((e) => console.error('Failed to save profile:', e));
+  }
 
-  function makeUser(email, name, pw, role) {
-    const clean = email || '';
-    const explicit = ['admin', 'client'].indexOf(role) !== -1 ? role : '';
-    const isAdmin = explicit ? explicit === 'admin' : clean.toLowerCase().indexOf('admin') !== -1;
-    const rawName = name || clean.split('@')[0].replace(/[._-]+/g, ' ').trim();
-    return {
-      name: rawName ? rawName.replace(/\b\w/g, (c) => c.toUpperCase()) : 'Guest',
-      email: clean,
-      phone: '',
-      location: '',
-      bio: '',
-      role: isAdmin ? 'admin' : 'client',
-      pw: pw || '',
-      at: Date.now(),
-    };
+  /* Track when an admin last opened a section so notifications clear on open. */
+  function getSeen() {
+    const u = currentUser();
+    return (u && u.seen && typeof u.seen === 'object') ? u.seen : {};
+  }
+  function markSeen(section) {
+    const u = currentUser();
+    if (!u) return;
+    const seen = Object.assign({}, u.seen || {});
+    seen[section] = Date.now();
+    saveUser({ seen });
+  }
+  function seenSince(section) {
+    const t = getSeen()[section];
+    return t ? +t : 0;
+  }
+
+  function isUserActive(email) {
+    const u = currentUser();
+    if (!u || String(u.email || '').toLowerCase() !== String(email || '').toLowerCase()) return true;
+    return u.active !== false;
+  }
+
+  function requireSignedIn() {
+    const F = window.Firebase;
+    if (F && F.userState && F.userState.user) return true;
+    toast('Please sign in to continue.');
+    setTimeout(() => { location.href = 'login.html'; }, 900);
+    return false;
   }
 
   function renderUser() {
@@ -295,15 +318,18 @@ function propCoords(p) {
   function unreadFor(u) {
     if (!u || !u.email) return 0;
     const isAdmin = u.role === 'admin';
-    return getStore('realtor_messages').filter((m) => {
-      if (isAdmin) return !m.read && m.to && m.to.toLowerCase().indexOf('realtyhomes') !== -1;
+    const since = isAdmin ? seenSince('messages') : 0;
+    const msgs = window.Firebase ? window.Firebase.store.getArray('realtor_messages') : [];
+    return msgs.filter((m) => {
+      if (isAdmin) return !m.read && m.to && m.to.toLowerCase().indexOf('realtyhomes') !== -1 && (m.at || 0) >= since;
       return !m.read && m.to && m.to.toLowerCase() === u.email.toLowerCase();
     }).length;
   }
 
   function requireAuth(roleRequired) {
+    const F = window.Firebase;
     const u = currentUser();
-    if (!u || !u.email) {
+    if (!F || !F.userState.user || !u || !u.email) {
       location.href = 'login.html' + (roleRequired === 'admin' ? '?role=admin' : '');
       return null;
     }
@@ -323,8 +349,12 @@ function propCoords(p) {
     scrim.addEventListener('click', () => { side.classList.remove('open'); scrim.classList.remove('open'); });
     $$('[data-logout]').forEach((b) =>
       b.addEventListener('click', () => {
-        localStorage.removeItem('realtor_user');
-        location.reload();
+        const F = window.Firebase;
+        if (F && F.signOut) {
+          F.signOut().finally(() => location.href = 'login.html');
+        } else {
+          location.href = 'login.html';
+        }
       })
     );
     $$('a[data-section]').forEach((a) =>
@@ -387,29 +417,25 @@ function propCoords(p) {
 
   /* ---------------- Property data ---------------- */
   function getProps() { return PROPERTIES; }
-  function saveProps() { localStorage.setItem('realtor_admin_props', JSON.stringify(PROPERTIES)); }
+  function saveProps() { return savePropsToFirestore(); }
 
   /* ---------------- Agent data ---------------- */
   function getAgents() {
-    const saved = getStore('realtor_agents');
-    if (saved.length) return saved;
-    const defs = [
-      { id: 1, name: AGENT.name, role: AGENT.title, email: AGENT.email, phone: AGENT.phone, sales: AGENT.homesSold, rating: AGENT.rating, years: AGENT.years, intro: AGENT.intro, photo: AGENT.photo },
-      { id: 2, name: 'James Carter', role: 'Listing Specialist', email: 'james@realtyhomes.com', phone: '+1 (555) 445-8810', sales: 128, rating: 4.8, years: 7, intro: 'James focuses on accurate pricing and fast, stress-free listings with strong marketing reach.', photo: '' },
-      { id: 3, name: 'Amanda Reed', role: 'Rentals Manager', email: 'amanda@realtyhomes.com', phone: '+1 (555) 220-1190', sales: 96, rating: 4.9, years: 5, intro: 'Amanda matches renters with the right home and manages leases with care and transparency.', photo: '' },
-    ];
-    setStore('realtor_agents', defs);
-    return defs;
+    return window.Firebase ? window.Firebase.store.getArray('realtor_agents') : [];
   }
-  function saveAgents(list) { setStore('realtor_agents', list); }
+  function saveAgents(list) {
+    if (!window.Firebase) return;
+    window.Firebase.store.set('realtor_agents', list);
+    window.Firebase.store.commit();
+  }
   function getPrimaryAgent() {
     const agents = getAgents();
-    return agents[0] || AGENT;
+    return agents[0] || AGENT_FALLBACK;
   }
 
   /* ---------------- Settings ---------------- */
   function getSettings() {
-    try { return JSON.parse(localStorage.getItem('realtor_settings') || '{}') || {}; } catch (e) { return {}; }
+    return window.Firebase ? window.Firebase.store.getObj('realtor_settings', {}) : {};
   }
   function applySettings() {
     const s = getSettings();
@@ -444,30 +470,25 @@ function propCoords(p) {
   }
 
   /* ---------------- Per-user saved searches ---------------- */
-  function searchesKey() {
-    try {
-      const u = JSON.parse(localStorage.getItem('realtor_user') || 'null');
-      if (u && u.email) return 'realtor_searches:' + String(u.email).toLowerCase();
-    } catch (e) { /* ignore */ }
-    return 'realtor_searches';
-  }
   function getSearches() {
-    const key = searchesKey();
-    try {
-      const list = JSON.parse(localStorage.getItem(key) || '[]');
-      if (key !== 'realtor_searches') {
-        const guest = JSON.parse(localStorage.getItem('realtor_searches') || '[]');
-        if (guest.length) {
-          const merged = guest.concat(list);
-          localStorage.setItem(key, JSON.stringify(merged));
-          localStorage.setItem('realtor_searches', '[]');
-          return merged;
-        }
-      }
-      return list;
-    } catch (e) { return []; }
+    const email = currentEmail();
+    if (email) {
+      const m = window.Firebase.store.getObj('searches', {});
+      return Array.isArray(m[email]) ? m[email].slice() : [];
+    }
+    try { return JSON.parse(localStorage.getItem('realtor_searches') || '[]'); } catch (e) { return []; }
   }
-  function saveSearches(list) { localStorage.setItem(searchesKey(), JSON.stringify(list)); }
+  function saveSearches(list) {
+    const email = currentEmail();
+    if (email) {
+      const m = window.Firebase.store.getObj('searches', {});
+      m[email] = Array.isArray(list) ? list.slice() : [];
+      window.Firebase.store.set('searches', m);
+      window.Firebase.store.commit();
+    } else {
+      localStorage.setItem('realtor_searches', JSON.stringify(list));
+    }
+  }
 
   /* ---------------- Mini property card ---------------- */
   function dashCard(p) {
@@ -497,37 +518,66 @@ function propCoords(p) {
   window.Dash = {
     $, $$, esc, getStore, setStore, initials, timeAgo, fmtDate,
     toast, currentUser, saveUser, requireAuth, renderUser,
-    makeUser, getAgents, saveAgents, getPrimaryAgent,
+    isUserActive, markSeen, seenSince, getAgents, saveAgents, getPrimaryAgent,
     getSettings, applySettings, getSearches, saveSearches,
     initSidebar, goTo, openDashModal, closeDashModal,
     getProps, saveProps, dashCard, getFavorites, toggleFavorite, formatPrice,
+    onAuth() {}, onData() {},
   };
 
   document.addEventListener('click', (e) => {
-    const btn = e.target.closest('[data-dfav]');
+    const btn = e.target.closest('.password-toggle');
     if (btn) {
       e.stopPropagation();
-      const id = +btn.dataset.dfav;
+      const input = btn.closest('.password-field') && btn.closest('.password-field').querySelector('input');
+      if (!input) return;
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      btn.innerHTML = show ? ICONS.eyeOff : ICONS.eye;
+      return;
+    }
+    const btn2 = e.target.closest('[data-dfav]');
+    if (btn2) {
+      e.stopPropagation();
+      const id = +btn2.dataset.dfav;
       const now = toggleFavorite(id);
-      btn.classList.toggle('active', now);
-      btn.innerHTML = now ? ICONS.heartFill : ICONS.heart;
+      btn2.classList.toggle('active', now);
+      btn2.innerHTML = now ? ICONS.heartFill : ICONS.heart;
       toast(now ? 'Saved to favorites' : 'Removed from favorites', now ? 'success' : '');
       if (window.DashOnSection) window.DashOnSection(window.Dash.currentSection || '');
     }
   });
 
-  /* Live-refresh a section when data changes in another tab, and keep
-     the public footer/brand in sync with saved settings. */
-  window.addEventListener('storage', (e) => {
+  /* Live-refresh sections when data changes elsewhere, and keep the
+     public footer/brand in sync with saved settings. */
+  function liveRefresh() {
     applySettings();
     if (window.DashOnSection && window.Dash.currentSection) {
       const live = ['overview', 'messages', 'leads', 'viewings', 'properties', 'agents', 'saved-homes', 'searches'];
       if (live.indexOf(window.Dash.currentSection) !== -1) window.DashOnSection(window.Dash.currentSection);
     }
     if (window.Dash.renderUser) window.Dash.renderUser();
-  });
+  }
 
-  applySettings();
+  /* Live-refresh a section when data changes in another tab. */
+  window.addEventListener('storage', liveRefresh);
+
+  whenFirebase(() => {
+    window.Dash.onData = liveRefresh;
+    applySettings();
+    const F = window.Firebase;
+    if (F && F.store && F.store.watch) F.store.watch(liveRefresh);
+    if (F && F.props && F.props.watch) {
+      F.props.watch(() => {
+        loadPropsIntoMemory();
+        if (window.DashOnSection && window.Dash.currentSection) {
+          const live = ['overview', 'properties', 'saved-homes', 'hero'];
+          if (live.indexOf(window.Dash.currentSection) !== -1) window.DashOnSection(window.Dash.currentSection);
+        }
+      });
+    }
+  });
 })();
 
 
@@ -791,6 +841,16 @@ function propCoords(p) {
 
   /* ---------------- Form submit handler ---------------- */
   function persistItem(key, item) {
+    const F = window.Firebase;
+    if (F && F.store) {
+      whenFirebase(() => {
+        const list = F.store.getArray(key);
+        list.push(item);
+        F.store.set(key, list);
+        F.store.commit();
+      });
+      return;
+    }
     let list = [];
     try { list = JSON.parse(localStorage.getItem(key) || '[]'); } catch (e) { list = []; }
     list.push(item);
@@ -1010,9 +1070,13 @@ function propCoords(p) {
 
   /* ---------------- Featured carousel ---------------- */
   const carousel = $('#featured-carousel');
-  if (carousel) {
+  function renderCarousel() {
+    if (!carousel) return;
     const featured = PROPERTIES.filter((p) => p.featured);
-    carousel.innerHTML = featured.map((p) => cardHTML(p)).join('');
+    carousel.innerHTML = featured.length ? featured.map((p) => cardHTML(p)).join('')
+      : `<p class="dash-hint" style="text-align:center;padding:24px">No featured homes yet.</p>`;
+  }
+  if (carousel) {
     const scroll = (dir) => { carousel.scrollBy({ left: dir * 320, behavior: 'smooth' }); };
     $('#carousel-prev').addEventListener('click', () => scroll(-1));
     $('#carousel-next').addEventListener('click', () => scroll(1));
@@ -1021,7 +1085,7 @@ function propCoords(p) {
   /* ---------------- Hero slideshow ---------------- */
   function heroImages() {
     try {
-      const h = JSON.parse(localStorage.getItem('realtor_hero') || '{}');
+      const h = (window.Firebase && window.Firebase.store.getObj('realtor_hero', {})) || {};
       const list = (h && Array.isArray(h.images)) ? h.images.map((u) => String(u).trim()).filter(Boolean) : [];
       return list.length ? list : [IMAGES.hero];
     } catch (e) { return [IMAGES.hero]; }
@@ -1059,7 +1123,8 @@ function propCoords(p) {
     });
     restart();
   }
-  initHero();
+  whenFirebase(() => { initHero(); renderCarousel(); });
+
 
   /* ---------------- Property details modal ---------------- */
   const pModal = $('#property-modal');
@@ -1094,9 +1159,9 @@ function propCoords(p) {
   function propertyHTML(p) {
     const fav = getFavorites().includes(p.id);
     const tag = cardTag(p);
-    const agent = (window.Dash && window.Dash.getPrimaryAgent) ? window.Dash.getPrimaryAgent() : AGENT;
-    const agentPhone = String(agent.phone || AGENT.phone).replace(/[^+\d]/g, '');
-    const agentMail = agent.email || AGENT.email;
+    const agent = primaryAgent();
+    const agentPhone = String(agent.phone || AGENT_FALLBACK.phone).replace(/[^+\d]/g, '');
+    const agentMail = agent.email || AGENT_FALLBACK.email;
     const feats = [
       { i: ICONS.bed, v: p.beds, l: 'Bedrooms' },
       { i: ICONS.bath, v: p.baths, l: 'Bathrooms' },
@@ -1137,7 +1202,7 @@ function propCoords(p) {
         <p class="pd-desc">${p.desc}</p>
         ${amens.length ? `<div class="pd-amen">${amens.map((a) => `<span>${a}</span>`).join('')}</div>` : ''}
         <div class="pd-agent">
-          <img src="${agent.photo || AGENT.photo}" alt="${agent.name}" onerror="this.style.display='none'">
+          <img src="${agent.photo || AGENT_FALLBACK.photo}" alt="${agent.name}" onerror="this.style.display='none'">
           <div style="flex:1">
             <b>${agent.name}</b>
             <span>${agent.role || ''}</span>
@@ -1198,14 +1263,14 @@ function propCoords(p) {
   /* ---------------- Meet-your-agent section ---------------- */
   function renderAgentSection() {
     if (!$('#agent')) return;
-    const a = (window.Dash && window.Dash.getPrimaryAgent) ? window.Dash.getPrimaryAgent() : AGENT;
-    const phone = String(a.phone || AGENT.phone).replace(/[^+\d]/g, '');
+    const a = primaryAgent();
+    const phone = String(a.phone || AGENT_FALLBACK.phone).replace(/[^+\d]/g, '');
     const nameEl = $('#agent-name');
     if (nameEl) nameEl.textContent = a.name;
     const titleEl = $('#agent-title');
     if (titleEl) titleEl.textContent = a.role || '';
     const introEl = $('#agent-intro');
-    if (introEl) introEl.textContent = a.intro || AGENT.intro;
+    if (introEl) introEl.textContent = a.intro || AGENT_FALLBACK.intro;
     const imgEl = $('#agent-photo-img');
     if (imgEl) {
       if (a.photo) { imgEl.src = a.photo; imgEl.alt = a.name + (a.role ? ', ' + a.role : ''); imgEl.style.display = ''; }
@@ -1216,7 +1281,7 @@ function propCoords(p) {
     const waEl = $('#agent-wa');
     if (waEl) waEl.setAttribute('href', 'https://wa.me/' + phone.replace(/^\+/, ''));
     const mailEl = $('#agent-email');
-    if (mailEl) mailEl.setAttribute('href', 'mailto:' + (a.email || AGENT.email));
+    if (mailEl) mailEl.setAttribute('href', 'mailto:' + (a.email || AGENT_FALLBACK.email));
     const ratingEl = $('#agent-rating');
     if (ratingEl) ratingEl.textContent = a.rating != null ? String(a.rating) : '—';
     const yearsEl = $('#agent-years');
@@ -1224,7 +1289,7 @@ function propCoords(p) {
     const soldEl = $('#agent-sold');
     if (soldEl) soldEl.textContent = a.sales != null ? String(a.sales) : '—';
   }
-  renderAgentSection();
+  whenFirebase(renderAgentSection);
 
   /* ---------------- Expose for browse page ---------------- */
   window.Realty = {
@@ -1607,11 +1672,12 @@ function propCoords(p) {
     }
   }
 
-  initFromParams();
-  applyAndRender();
-
-  const openId = params.get('id');
-  if (openId) window.Realty.openProperty(+openId);
+  whenFirebase(() => {
+    initFromParams();
+    applyAndRender();
+    const openId = params.get('id');
+    if (openId) window.Realty.openProperty(+openId);
+  });
 })();
 
 
@@ -1629,40 +1695,16 @@ function propCoords(p) {
   if (!D) return;
   const { $, $$, esc, getStore, setStore, initials, timeAgo, fmtDate, toast } = D;
 
-  const user = D.requireAuth('admin');
-  if (!user) return;
+  let user = null;
+  function gateAdmin() {
+    const u = D.requireAuth('admin');
+    if (!u) return false;
+    user = u;
+    return true;
+  }
 
   window.Dash.pageTitle = 'Admin Dashboard';
-  const AGENT_EMAIL = (AGENT && AGENT.email) || 'sarah@realtyhomes.com';
-
-  /* ---------------- Demo data seeding (once) ---------------- */
-  function seedDemo() {
-    if (localStorage.getItem('realtor_seeded')) return;
-    localStorage.setItem('realtor_seeded', '1');
-    if (!getStore('realtor_leads').length) {
-      setStore('realtor_leads', [
-        { type: 'valuation', name: 'Laura Bennett', email: 'laura.b@mail.com', address: '18 Maplewood Ave, Greenfield', message: 'Please value our 3-bed family home.', status: 'new', at: Date.now() - 1000 * 60 * 150 },
-        { type: 'consult', name: 'Daniel Osei', email: 'daniel.o@mail.com', phone: '+1 (555) 234-8812', date: '2026-08-12', status: 'new', at: Date.now() - 1000 * 60 * 60 * 26 },
-        { type: 'valuation', name: 'Priya Sharma', email: 'priya.s@mail.com', address: '9 Sand Dollar Way, Bayview', message: 'Oceanfront bungalow valuation.', status: 'contacted', at: Date.now() - 1000 * 60 * 60 * 50 },
-        { type: 'consult', name: 'Marcus Reid', email: 'marcus.r@mail.com', phone: '+1 (555) 876-2210', date: '2026-08-18', status: 'new', at: Date.now() - 1000 * 60 * 60 * 8 },
-      ]);
-    }
-    if (!getStore('realtor_viewings').length) {
-      setStore('realtor_viewings', [
-        { propId: 1, title: 'Modern Lakeside Villa', price: 1850000, status: 'sale', name: 'Laura Bennett', email: 'laura.b@mail.com', date: '2026-08-14', time: 'Afternoon (12-4)', viewingStatus: 'confirmed', at: Date.now() - 1000 * 60 * 60 * 30 },
-        { propId: 3, title: 'Family Suburban House', price: 620000, status: 'sale', name: 'Marcus Reid', email: 'marcus.r@mail.com', date: '2026-08-15', time: 'Evening (4-7)', viewingStatus: 'new', at: Date.now() - 1000 * 60 * 60 * 5 },
-        { propId: 6, title: 'Downtown Skyline Penthouse', price: 7200, status: 'rent', name: 'Daniel Osei', email: 'daniel.o@mail.com', date: '2026-08-16', time: 'Morning (9-12)', viewingStatus: 'new', at: Date.now() - 1000 * 60 * 60 * 2 },
-      ]);
-    }
-    if (!getStore('realtor_messages').length) {
-      setStore('realtor_messages', [
-        { id: 1, from: 'jane.smith@mail.com', fromName: 'Jane Smith', to: AGENT_EMAIL, subject: 'Question about Lakeside Villa', body: 'Hi! Is the Modern Lakeside Villa still available? Are viewings possible this weekend?', read: false, at: Date.now() - 1000 * 60 * 60 * 12 },
-        { id: 2, from: AGENT_EMAIL, fromName: AGENT.name, to: 'jane.smith@mail.com', subject: 'RE: Question about Lakeside Villa', body: 'Hi Jane, yes it is still on the market. I can arrange a viewing this Saturday morning — does 10am work?', read: true, at: Date.now() - 1000 * 60 * 60 * 10 },
-        { id: 3, from: 'mike.ross@mail.com', fromName: 'Mike Ross', to: AGENT_EMAIL, subject: 'Selling my property', body: 'Hello, I would like a valuation and a consultation about selling my condo downtown.', read: false, at: Date.now() - 1000 * 60 * 60 * 3 },
-      ]);
-    }
-  }
-  seedDemo();
+  const AGENT_EMAIL = primaryAgentEmail() || 'admin@realtyhomes.com';
 
   /* ---------------- Badges ---------------- */
   function refreshBadges() {
@@ -1670,8 +1712,11 @@ function propCoords(p) {
     const leads = getStore('realtor_leads');
     const viewings = getStore('realtor_viewings');
     setBadge('nav-count-props', props.length);
-    setBadge('nav-count-leads', leads.filter((l) => l.status === 'new').length);
-    setBadge('nav-count-viewings', viewings.filter((v) => v.viewingStatus === 'new' || v.viewingStatus === 'confirmed').length);
+    setBadge('nav-count-users', getStore('realtor_users').length);
+    setBadge('nav-count-leads', leads.filter((l) => l.status === 'new' && (l.at || 0) >= D.seenSince('leads')).length);
+    setBadge('nav-count-viewings', viewings.filter((v) => (v.viewingStatus === 'new' || v.viewingStatus === 'confirmed') && (v.at || 0) >= D.seenSince('viewings')).length);
+    const F = window.Firebase;
+    if (F && F.listUsers) F.listUsers().then(() => setBadge('nav-count-users', F.usersCache.list.length));
   }
   function setBadge(id, n) {
     const el = $('#' + id);
@@ -2022,6 +2067,8 @@ function propCoords(p) {
     $('#thread-input').placeholder = 'Reply to ' + esc(conv.name) + '…';
   }
 
+  const ADMIN_NAME = (user && user.name) || 'Realty Homes Admin';
+
   function sendReply() {
     const input = $('#thread-input');
     if (!input || !activeConvo || !input.value.trim()) return;
@@ -2029,7 +2076,7 @@ function propCoords(p) {
     const last = msgs.slice().sort((a, b) => (b.at || 0) - (a.at || 0))[0];
     msgs.push({
       id: (last ? last.id : 0) + 1,
-      from: AGENT_EMAIL, fromName: AGENT.name,
+      from: AGENT_EMAIL, fromName: ADMIN_NAME,
       to: activeConvo,
       subject: 'RE: your message',
       body: input.value.trim(), read: true, at: Date.now(),
@@ -2059,7 +2106,7 @@ function propCoords(p) {
       const last = msgs.slice().sort((a, b) => (b.id || 0) - (a.id || 0))[0];
       msgs.push({
         id: (last ? last.id : 0) + 1,
-        from: AGENT_EMAIL, fromName: AGENT.name,
+        from: AGENT_EMAIL, fromName: ADMIN_NAME,
         to: f.to.trim(),
         subject: f.subject.trim(),
         body: f.body.trim(),
@@ -2111,7 +2158,7 @@ function propCoords(p) {
         <div class="field full"><label>Role</label><input name="role" required value="${esc(a ? a.role : '')}"></div>
         <div class="field"><label>Email</label><input type="email" name="email" value="${esc(a ? a.email : '')}"></div>
         <div class="field"><label>Phone</label><input name="phone" value="${esc(a ? a.phone : '')}"></div>
-        <div class="field"><label>Years experience</label><input type="number" name="years" min="0" value="${a && a.years != null ? a.years : AGENT.years}"></div>
+        <div class="field"><label>Years experience</label><input type="number" name="years" min="0" value="${a && a.years != null ? a.years : 0}"></div>
         <div class="field"><label>Sales</label><input type="number" name="sales" min="0" value="${a ? a.sales : 0}"></div>
         <div class="field"><label>Rating</label><input type="number" name="rating" step="0.1" min="0" max="5" value="${a ? a.rating : 4.9}"></div>
         <div class="field full"><label>Photo URL (optional)</label><input name="photo" value="${esc(a ? a.photo : '')}"></div>
@@ -2140,7 +2187,7 @@ function propCoords(p) {
 
   /* ---------------- Settings ---------------- */
   function getSettings() {
-    try { return JSON.parse(localStorage.getItem('realtor_settings') || '{}'); } catch (e) { return {}; }
+    return D.getSettings();
   }
   function renderSettings() {
     const s = getSettings();
@@ -2155,15 +2202,35 @@ function propCoords(p) {
   }
 
   function renderUsers() {
-    const el = $('#users-list');
+    const el = $('#users-table');
     if (!el) return;
-    const users = getStore('realtor_users');
-    el.innerHTML = users.length
-      ? `<table class="dash-table"><thead><tr><th>Name</th><th>Email</th><th>Joined</th></tr></thead><tbody>` +
-        users.slice().sort((a, b) => (b.at || 0) - (a.at || 0)).map((u) =>
-          `<tr><td><b>${esc(u.name || '—')}</b></td><td>${esc(u.email || '')}</td><td>${u.at ? fmtDate(u.at) : '—'}</td></tr>`).join('') +
-        `</tbody></table>`
-      : '<p class="dash-hint">No registered accounts yet.</p>';
+    const F = window.Firebase;
+    if (!F) return;
+    F.listUsers().then(() => {
+      const users = F.usersCache.list;
+      const me = D.currentUser();
+      const myEmail = me && me.email ? String(me.email).toLowerCase() : '';
+      const sorted = users.slice().sort((a, b) => (b.at || 0) - (a.at || 0));
+      $('#users-empty').hidden = sorted.length > 0;
+      el.innerHTML = sorted.length ? `
+        <thead><tr><th>User</th><th>Role</th><th>Status</th><th>Joined</th><th></th></tr></thead>
+        <tbody>${sorted.map((u) => {
+          const active = u.active !== false;
+          const isMe = String(u.email || '').toLowerCase() === myEmail;
+          return `
+          <tr class="${active ? '' : 'row-muted'}">
+            <td><div class="td-prop"><div class="dash-avatar">${initials(u.name || u.email)}</div><div><b>${esc(u.name || '—')}${isMe ? ' <em style="color:var(--muted);font-weight:600">(you)</em>' : ''}</b><span>${esc(u.email || '')}</span></div></div></td>
+            <td><span class="tag-badge ${u.role === 'admin' ? 'status-confirmed' : 'status-contacted'}">${u.role === 'admin' ? 'Admin' : 'Client'}</span></td>
+            <td><span class="tag-badge ${active ? 'status-confirmed' : 'status-cancelled'}">${active ? 'Active' : 'Deactivated'}</span></td>
+            <td>${u.at ? fmtDate(u.at) : '—'}</td>
+            <td><div class="td-actions">${isMe
+              ? '<span class="dash-hint" style="margin:0">—</span>'
+              : `<button class="btn btn-soft btn-sm" data-user-role="${esc(u.email)}">${u.role === 'admin' ? 'Make client' : 'Make admin'}</button>
+                 <button class="btn ${active ? 'btn-danger-soft' : 'btn-primary'} btn-sm" data-user-toggle="${esc(u.email)}">${active ? 'Deactivate' : 'Activate'}</button>`}
+            </div></td>
+          </tr>`; }).join('')}</tbody>` : '';
+      setBadge('nav-count-users', sorted.length);
+    });
   }
 
   const sf = $('#settings-form');
@@ -2171,15 +2238,23 @@ function propCoords(p) {
     e.preventDefault();
     const s = {};
     new FormData(sf).forEach((v, k) => { s[k] = v; });
-    localStorage.setItem('realtor_settings', JSON.stringify(s));
+    const F = window.Firebase;
+    if (F && F.store) {
+      F.store.set('realtor_settings', s);
+      F.store.commit();
+    }
     toast('Settings saved');
   });
 
   /* ---------------- Hero ---------------- */
   function getHero() {
-    try { return JSON.parse(localStorage.getItem('realtor_hero') || '{}'); } catch (e) { return {}; }
+    return window.Firebase ? window.Firebase.store.getObj('realtor_hero', {}) : {};
   }
-  function setHero(h) { localStorage.setItem('realtor_hero', JSON.stringify(h)); }
+  function setHero(h) {
+    if (!window.Firebase) return;
+    window.Firebase.store.set('realtor_hero', h);
+    window.Firebase.store.commit();
+  }
   function addHeroImg(url) {
     url = String(url || '').trim();
     if (!/^https?:\/\//i.test(url)) { toast('Enter a valid image URL'); return; }
@@ -2234,8 +2309,9 @@ function propCoords(p) {
       const id = +t.closest('[data-del-prop]').dataset.delProp;
       const p = D.getProps().find((x) => x.id === id);
       confirmDelete('Delete property?', (p ? p.title : 'Property') + ' will be removed from the site.', () => {
+        recordDeletedProp(id);
         D.getProps().splice(D.getProps().findIndex((x) => x.id === id), 1);
-        D.saveProps(); renderProps();
+        D.saveProps().then(() => renderProps());
         toast('Property deleted');
       });
     } else if (t.closest('[data-del-lead]')) {
@@ -2255,6 +2331,26 @@ function propCoords(p) {
       const agents = getAgents();
       D.saveAgents(agents.filter((a) => a.id !== id));
       renderAgents(); toast('Agent removed');
+    } else if (t.closest('[data-user-role]')) {
+      const email = t.closest('[data-user-role]').dataset.userRole;
+      const F = window.Firebase;
+      const u = (F && F.usersCache.list) ? F.usersCache.list.find((x) => String(x.email || '').toLowerCase() === String(email || '').toLowerCase()) : null;
+      if (u && u.uid) {
+        const newRole = u.role === 'admin' ? 'client' : 'admin';
+        F.db.collection('users').doc(u.uid).set({ role: newRole }, { merge: true })
+          .then(() => { u.role = newRole; renderUsers(); toast((u.name || 'User') + ' is now a ' + newRole); })
+          .catch(() => toast('Could not update user role'));
+      }
+    } else if (t.closest('[data-user-toggle]')) {
+      const email = t.closest('[data-user-toggle]').dataset.userToggle;
+      const F = window.Firebase;
+      const u = (F && F.usersCache.list) ? F.usersCache.list.find((x) => String(x.email || '').toLowerCase() === String(email || '').toLowerCase()) : null;
+      if (u && u.uid) {
+        const active = u.active === false;
+        F.db.collection('users').doc(u.uid).set({ active }, { merge: true })
+          .then(() => { u.active = active; renderUsers(); toast(active ? 'User activated' : 'User deactivated'); })
+          .catch(() => toast('Could not update user status'));
+      }
     } else if (t.closest('#btn-add-hero-img')) {
       addHeroImg($('#hero-img-url').value);
       if ($('#hero-img-url')) $('#hero-img-url').value = '';
@@ -2275,11 +2371,6 @@ function propCoords(p) {
         renderProps();
         toast(p.featured ? 'Added to hero cards' : 'Removed from hero cards');
       }
-    } else if (t.closest('#btn-reset-data')) {
-      confirmDelete('Reset demo data?', 'All property edits, adds and deletions will be undone.', () => {
-        localStorage.removeItem('realtor_admin_props');
-        location.reload();
-      });
     }
   });
 
@@ -2307,9 +2398,15 @@ function propCoords(p) {
     viewings: renderViewings,
     messages: () => { renderConvos(); renderThread(); },
     agents: renderAgents,
+    users: renderUsers,
     settings: renderSettings,
   };
-  window.DashOnSection = (id) => { if (renderers[id]) renderers[id](); };
+  window.DashOnSection = (id) => {
+    if (id === 'leads' || id === 'viewings' || id === 'messages') D.markSeen(id);
+    if (renderers[id]) renderers[id]();
+    if (id === 'messages') D.renderUser();
+    refreshBadges();
+  };
 
   /* ---------------- Wire static controls ---------------- */
   $('#prop-search').addEventListener('input', (e) => { propSearch = e.target.value; renderProps(); });
@@ -2323,13 +2420,16 @@ function propCoords(p) {
   if (tf) tf.addEventListener('submit', (e) => { e.preventDefault(); sendReply(); });
 
   /* ---------------- Boot ---------------- */
-  D.initSidebar();
-  D.renderUser();
-  refreshBadges();
-  renderOverview();
-  renderProps();
-  const hash = location.hash.slice(1);
-  if (hash && document.getElementById(hash)) D.goTo(hash);
+  whenFirebase(() => {
+    if (!gateAdmin()) return;
+    D.initSidebar();
+    D.renderUser();
+    refreshBadges();
+    renderOverview();
+    renderProps();
+    const hash = location.hash.slice(1);
+    if (hash && document.getElementById(hash)) D.goTo(hash);
+  });
 })();
 
 
@@ -2347,11 +2447,17 @@ function propCoords(p) {
   if (!D) return;
   const { $, $$, esc, getStore, setStore, initials, timeAgo, fmtDate, toast } = D;
 
-  const user = D.requireAuth();
-  if (!user) return;
+  let user = null;
+  function gateClient() {
+    const u = D.requireAuth();
+    if (!u) return false;
+    user = u;
+    return true;
+  }
 
   window.Dash.pageTitle = 'My Dashboard';
-  const AGENT_EMAIL = (AGENT && AGENT.email) || 'sarah@realtyhomes.com';
+  const AGENT_EMAIL = primaryAgentEmail() || 'admin@realtyhomes.com';
+  const AGENT_NAME = primaryAgent().name || 'Realty Homes';
 
   /* ---------------- Data ---------------- */
   function myViewings() {
@@ -2590,7 +2696,7 @@ function propCoords(p) {
     nf.reset();
     activeConvo = AGENT_EMAIL;
     renderConvos(); renderThread(); refreshBadges();
-    toast('Message sent to ' + AGENT.name, 'success');
+    toast('Message sent to ' + AGENT_NAME, 'success');
   });
 
   const pf = $('#profile-form');
@@ -2608,12 +2714,15 @@ function propCoords(p) {
   });
 
   /* ---------------- Boot ---------------- */
-  D.initSidebar();
-  D.renderUser();
-  refreshBadges();
-  renderOverview();
-  const hash = location.hash.slice(1);
-  if (hash && document.getElementById(hash)) D.goTo(hash);
+  whenFirebase(() => {
+    if (!gateClient()) return;
+    D.initSidebar();
+    D.renderUser();
+    refreshBadges();
+    renderOverview();
+    const hash = location.hash.slice(1);
+    if (hash && document.getElementById(hash)) D.goTo(hash);
+  });
 })();
 
 
@@ -2628,13 +2737,15 @@ function propCoords(p) {
   const form = document.getElementById('contact-form');
   if (!form) return;
 
-  const AGENT_EMAIL = (typeof AGENT !== 'undefined' && AGENT.email) || 'sarah@realtyhomes.com';
+  const AGENT_EMAIL = primaryAgentEmail() || 'admin@realtyhomes.com';
 
-  function storeMessages(list) {
-    localStorage.setItem('realtor_messages', JSON.stringify(list));
-  }
   function getMessages() {
-    try { return JSON.parse(localStorage.getItem('realtor_messages') || '[]'); } catch (e) { return []; }
+    return window.Firebase ? window.Firebase.store.getArray('realtor_messages') : [];
+  }
+  function storeMessages(list) {
+    if (!window.Firebase) return;
+    window.Firebase.store.set('realtor_messages', list);
+    window.Firebase.store.commit();
   }
   function toast(msg, type) {
     const el = document.getElementById('toast');
@@ -2649,19 +2760,21 @@ function propCoords(p) {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form).entries());
     const subject = [data.topic, data.subject].filter(Boolean).join(': ');
-    const msgs = getMessages();
-    msgs.push({
-      id: Date.now(),
-      from: (data.email || '').trim(),
-      fromName: (data.name || '').trim(),
-      phone: (data.phone || '').trim(),
-      to: AGENT_EMAIL,
-      subject: subject,
-      body: (data.message || '').trim(),
-      read: false,
-      at: Date.now(),
+    whenFirebase(() => {
+      const msgs = getMessages();
+      msgs.push({
+        id: Date.now(),
+        from: (data.email || '').trim(),
+        fromName: (data.name || '').trim(),
+        phone: (data.phone || '').trim(),
+        to: AGENT_EMAIL,
+        subject: subject,
+        body: (data.message || '').trim(),
+        read: false,
+        at: Date.now(),
+      });
+      storeMessages(msgs);
     });
-    storeMessages(msgs);
     form.reset();
     toast('Message sent! We\'ll get back to you within 24 hours.', 'success');
   });

@@ -984,12 +984,28 @@ table.dash-table { width: 100%; border-collapse: collapse; font-size: .92rem; }
   transition: border-color .15s ease;
 }
 .auth-card .field input:focus { border-color: var(--brand); }
+.password-field { position: relative; }
+.password-field input { padding-right: 44px; }
+.password-toggle {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  width: 34px; height: 34px; display: grid; place-items: center;
+  color: var(--ink-2); border-radius: 8px; cursor: pointer; background: transparent;
+  border: 0; padding: 0;
+}
+.password-toggle:hover { color: var(--brand); background: var(--surface-2); }
+.password-toggle svg { width: 20px; height: 20px; }
 .auth-divider { text-align: center; color: var(--muted); font-size: .82rem; margin: 14px 0; position: relative; }
 .auth-divider::before, .auth-divider::after {
   content: ''; position: absolute; top: 50%; width: 38%; height: 1px; background: var(--line);
 }
 .auth-divider::before { left: 0; } .auth-divider::after { right: 0; }
 .auth-demo { width: 100%; }
+.auth-forgot { display: inline-block; margin-top: 8px; font-size: .84rem; font-weight: 700; color: var(--brand); }
+.auth-forgot:hover { text-decoration: underline; }
+.auth-reset-info { color: var(--muted); font-size: .9rem; margin: 0 0 16px; }
+.auth-reset-msg { font-size: .9rem; color: var(--brand); margin-top: 14px; text-align: center; font-weight: 600; }
+.auth-err { color: var(--red); margin-top: 0; margin-bottom: 12px; }
+.dash-table tr.row-muted td { opacity: .55; }
 
 /* ---------- Auth pages (login / signup) ---------- */
 .auth-body {

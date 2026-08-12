@@ -151,7 +151,7 @@
         <div class="field" style="margin-bottom:14px"><label for="cf-subject">Subject</label><input id="cf-subject" name="subject" type="text" required placeholder="How can we help?"></div>
         <div class="field" style="margin-bottom:18px"><label for="cf-message">Message</label><textarea id="cf-message" name="message" rows="5" required placeholder="Tell us a little about what you need..."></textarea></div>
         <button class="btn btn-primary btn-block" type="submit">Send message</button>
-        <p class="contact-note">This is a demo site — your message is stored locally and visible in the Admin Dashboard.</p>
+        <p class="contact-note">Your message goes straight to our team and is visible in the Admin Dashboard.</p>
       </form>
     </div>
 
@@ -235,6 +235,10 @@
 
   <div class="toast" id="toast" role="status"></div>
 
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
   <script src="site.js"></script>
 </body>
 </html>
