@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — Realty Homes</title>
+  <meta name="description" content="Get in touch with Realty Homes. Call, email or visit our office, or send us a message and we'll reply within 24 hours.">
+  <meta name="robots" content="index, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Dark overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Fixed navigation -->
+  <header class="site-header" id="site-header">
+    <nav class="navbar container">
+      <button class="icon-btn nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/></svg>
+      </button>
+      <a href="index.html" class="logo">
+        <span class="logo-mark"><img src="realtor.jpeg" alt="Realty Homes"></span><span class="logo-text">Realty<span>Homes</span></span>
+      </a>
+      <div class="nav-right">
+        <a href="browse.html" class="icon-btn nav-search" aria-label="Search homes" title="Search homes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </a>
+        <a href="browse.html?saved=1" class="icon-btn nav-saved" aria-label="Saved homes" title="Saved homes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="badge saved-badge" id="saved-badge"></span>
+        </a>
+        <a href="login.html" class="btn btn-sm nav-login">Login</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Slide-in sidebar -->
+  <aside class="sidebar" id="sidebar" aria-label="Navigation menu">
+    <div class="sidebar-head">
+      <a href="index.html" class="logo">
+        <span class="logo-mark"><img src="realtor.jpeg" alt="Realty Homes"></span><span class="logo-text">Realty<span>Homes</span></span>
+      </a>
+      <button class="icon-btn" id="sidebar-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="side-link">Home</a>
+      <a href="browse.html" class="side-link">Buy Homes</a>
+      <a href="browse.html?status=rent" class="side-link">Rent Homes</a>
+      <a href="browse.html?category=land" class="side-link">Sell Your Home</a>
+      <a href="browse.html?category=luxury" class="side-link">Luxury Homes</a>
+      <a href="browse.html?category=commercial" class="side-link">Commercial Properties</a>
+      <a href="browse.html?category=land" class="side-link">Land for Sale</a>
+      <a href="index.html#services" class="side-link">Mortgage Calculator</a>
+      <a href="index.html#agent" class="side-link">Find an Agent</a>
+      <a href="index.html#welcome" class="side-link">About Us</a>
+      <a href="contact.html" class="side-link">Contact Us</a>
+      <a href="browse.html?saved=1" class="side-link side-saved">Saved Homes
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="side-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="badge saved-badge" id="saved-badge-menu"></span>
+      </a>
+      <a href="client.html" class="side-link">My Dashboard</a>
+      <a href="login.html" class="side-link side-login">Login / Sign Up</a>
+    </nav>
+    <div class="sidebar-social">
+      <span class="social-label">Follow us</span>
+      <div class="social-row">
+        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg></a>
+        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+        <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V9h4v1.5A6 6 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://wa.me/15551234567" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Page header -->
+  <div class="contact-top">
+    <div class="container contact-head">
+      <h1>Contact Us</h1>
+      <p>Questions about a home, ready to sell, or just want to talk? We're here to help.</p>
+    </div>
+  </div>
+
+  <!-- Contact body -->
+  <div class="container contact-body">
+    <div class="contact-grid">
+
+      <!-- Info column -->
+      <div class="contact-cards">
+        <a class="contact-card" href="tel:+15551234567">
+          <span class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <div>
+            <b>Call us</b>
+            <span>Mon–Fri, 9am–6pm</span>
+            <p>+1 (555) 123-4567</p>
+          </div>
+        </a>
+        <a class="contact-card" href="mailto:hello@realtyhomes.com">
+          <span class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+          <div>
+            <b>Email us</b>
+            <span>We reply within 24 hours</span>
+            <p>hello@realtyhomes.com</p>
+          </div>
+        </a>
+        <a class="contact-card" href="https://wa.me/15551234567" target="_blank" rel="noopener">
+          <span class="c-ico c-wa"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></span>
+          <div>
+            <b>WhatsApp</b>
+            <span>Fastest way to reach us</span>
+            <p>Chat with an agent</p>
+          </div>
+        </a>
+        <div class="contact-card">
+          <span class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <div>
+            <b>Visit our office</b>
+            <span>500 Market Street, Riverside, CA 90210</span>
+            <p>Open Mon–Sat · 9am–6pm</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form column -->
+      <form class="contact-form" id="contact-form" novalidate>
+        <h2>Send us a message</h2>
+        <p>Fill in the form and our team will get back to you within 24 hours.</p>
+        <div class="form-row">
+          <div class="field"><label for="cf-name">Full name</label><input id="cf-name" name="name" type="text" required placeholder="Jane Smith" autocomplete="name"></div>
+          <div class="field"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" required placeholder="jane@email.com" autocomplete="email"></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="cf-phone">Phone <span class="opt">(optional)</span></label><input id="cf-phone" name="phone" type="tel" placeholder="+1 555 123 4567" autocomplete="tel"></div>
+          <div class="field"><label for="cf-topic">Topic</label>
+            <select id="cf-topic" name="topic">
+              <option value="General enquiry">General enquiry</option>
+              <option value="Buying a home">Buying a home</option>
+              <option value="Selling a home">Selling a home</option>
+              <option value="Renting">Renting</option>
+              <option value="Valuation request">Valuation request</option>
+              <option value="Feedback">Feedback</option>
+            </select>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:14px"><label for="cf-subject">Subject</label><input id="cf-subject" name="subject" type="text" required placeholder="How can we help?"></div>
+        <div class="field" style="margin-bottom:18px"><label for="cf-message">Message</label><textarea id="cf-message" name="message" rows="5" required placeholder="Tell us a little about what you need..."></textarea></div>
+        <button class="btn btn-primary btn-block" type="submit">Send message</button>
+        <p class="contact-note">This is a demo site — your message is stored locally and visible in the Admin Dashboard.</p>
+      </form>
+    </div>
+
+    <!-- Map -->
+    <div class="contact-map">
+      <iframe title="Realty Homes office location" src="https://www.openstreetmap.org/export/embed.html?bbox=-74.275%2C40.695%2C-74.215%2C40.725&amp;layer=mapnik" loading="lazy"></iframe>
+      <div class="map-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div><b>Realty Homes Office</b><span>500 Market Street, Riverside, CA</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="f-brand">
+          <a href="index.html" class="logo logo-light">
+            <span class="logo-mark"><img src="realtor.jpeg" alt="Realty Homes"></span><span class="logo-text">Realty<span>Homes</span></span>
+          </a>
+          <p>Realty Homes is a modern real estate platform connecting buyers, sellers and renters with verified properties and trusted agents.</p>
+          <div class="social-row">
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V9h4v1.5A6 6 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="https://wa.me/15551234567" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
+          </div>
+        </div>
+        <div class="f-col">
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a>
+          <a href="browse.html">Buy</a>
+          <a href="browse.html?status=rent">Rent</a>
+          <a href="index.html#services">Sell</a>
+          <a href="index.html#agent">Agents</a>
+          <a href="client.html">My Dashboard</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="f-col">
+          <h4>Contact</h4>
+          <a href="tel:+15551234567"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +1 (555) 123-4567</a>
+          <a href="mailto:hello@realtyhomes.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> hello@realtyhomes.com</a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> 500 Market Street, Riverside, CA</a>
+        </div>
+      </div>
+
+      <div class="f-partners">
+        <span class="f-partners-label">Our Partners</span>
+        <div class="partners-row">
+          <img src="realtor.jpeg" alt="REALTOR">
+          <img src="equalhousing.jpeg" alt="Equal Housing Opportunity">
+          <img src="mls.jpeg" alt="MLS">
+          <img src="brokerage.jpeg" alt="Brokerage">
+          <img src="lpt.jpeg" alt="LPT">
+        </div>
+      </div>
+
+      <div class="footer-legal">
+        <p class="copyright">© 2026 Realty Homes. All rights reserved.</p>
+        <div class="f-legal-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Shared modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-box" id="modal-box" role="dialog" aria-modal="true"></div>
+  </div>
+
+  <!-- Property details modal -->
+  <div class="modal" id="property-modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-property></div>
+    <div class="modal-box modal-lg" id="property-box" role="dialog" aria-modal="true"></div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="site.js"></script>
+</body>
+</html>

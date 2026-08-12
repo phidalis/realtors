@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — Realty Homes</title>
+  <meta name="description" content="Sign in to your Realty Homes account.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="auth-body">
+
+  <header class="auth-header">
+    <a href="index.html" class="logo">
+      <span class="logo-mark"><img src="realtor.jpeg" alt="Realty Homes"></span><span class="logo-text">Realty<span>Homes</span></span>
+    </a>
+    <a href="index.html" class="btn btn-soft btn-sm">Back to Home</a>
+  </header>
+
+  <main class="auth-page">
+    <div class="auth-card">
+      <div class="auth-card-head">
+        <h2>Welcome back</h2>
+        <p>Sign in to manage your homes or your dashboard.</p>
+      </div>
+
+      <form id="login-form" class="auth-form" novalidate>
+        <div class="field"><label>Email</label><input type="email" name="email" required placeholder="you@email.com"></div>
+        <div class="field"><label>Password</label><input type="password" name="password" required placeholder="••••••••"></div>
+        <button class="btn btn-primary btn-block" type="submit">Sign In</button>
+      </form>
+
+      <p class="auth-alt">Don't have an account? <a href="signup.html">Create one</a></p>
+
+      <div class="auth-divider">or</div>
+      <button class="btn btn-soft auth-demo" id="auth-demo" type="button">Explore the demo</button>
+      <p class="auth-note">Demo site — any email/password works.</p>
+    </div>
+  </main>
+
+  <footer class="auth-footer">
+    <span>© 2026 Realty Homes. All rights reserved.</span>
+    <span class="auth-footer-links"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a></span>
+  </footer>
+
+  <script src="site.js"></script>
+  <script>
+    (function () {
+      const D = window.Dash || {};
+
+      function registerUser(u) {
+        if (!D.getStore || !D.setStore) return;
+        const users = D.getStore('realtor_users');
+        if (!users.some(function (x) { return String(x.email || '').toLowerCase() === String(u.email || '').toLowerCase(); })) {
+          users.push({ email: u.email, name: u.name, role: u.role, at: Date.now() });
+          D.setStore('realtor_users', users);
+        }
+      }
+      function go(u) {
+        registerUser(u);
+        if (D.saveUser) D.saveUser(u);
+        location.href = u.role === 'admin' ? 'admin.html' : 'client.html';
+      }
+      function fallback(email) {
+        return { name: 'Guest', email: email || '', role: 'client', at: Date.now() };
+      }
+
+      document.getElementById('login-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(e.target).entries());
+        const u = D.makeUser ? D.makeUser(data.email, '', data.password) : fallback(data.email);
+        go(u);
+      });
+
+      var demo = document.getElementById('auth-demo');
+      if (demo) demo.addEventListener('click', function () {
+        const u = D.makeUser ? D.makeUser('client@realtyhomes.com', 'Demo Client', 'demo') : fallback('client@realtyhomes.com');
+        go(u);
+      });
+    })();
+  </script>
+</body>
+</html>

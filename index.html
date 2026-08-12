@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Realty Homes — Find the Perfect Place to Call Home</title>
+  <meta name="description" content="Browse thousands of verified homes for sale and rent across your favorite neighborhoods.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Dark overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Fixed navigation -->
+  <header class="site-header" id="site-header">
+    <nav class="navbar container">
+      <button class="icon-btn nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/></svg>
+      </button>
+      <a href="index.html" class="logo">
+        <span class="logo-mark">R</span><span class="logo-text">Realty<span>Homes</span></span>
+      </a>
+      <div class="nav-right">
+        <a href="browse.html" class="icon-btn nav-search" id="nav-search" aria-label="Search homes" title="Search homes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </a>
+        <a href="browse.html?saved=1" class="icon-btn nav-saved" id="nav-saved" aria-label="Saved homes" title="Saved homes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="badge saved-badge" id="saved-badge"></span>
+        </a>
+        <button class="btn btn-sm nav-login" data-open-modal="login">Login</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Slide-in sidebar -->
+  <aside class="sidebar" id="sidebar" aria-label="Navigation menu">
+    <div class="sidebar-head">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">R</span><span class="logo-text">Realty<span>Homes</span></span>
+      </a>
+      <button class="icon-btn" id="sidebar-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="side-link">Home</a>
+      <a href="browse.html" class="side-link">Buy Homes</a>
+      <a href="browse.html?status=rent" class="side-link">Rent Homes</a>
+      <a href="browse.html?category=land" class="side-link">Sell Your Home</a>
+      <a href="browse.html?category=luxury" class="side-link">Luxury Homes</a>
+      <a href="browse.html?category=commercial" class="side-link">Commercial Properties</a>
+      <a href="browse.html?category=land" class="side-link">Land for Sale</a>
+      <a href="#services" class="side-link" data-scroll data-tab="buy" data-modal="mortgage">Mortgage Calculator</a>
+      <a href="#agent" class="side-link" data-scroll>Find an Agent</a>
+      <a href="#welcome" class="side-link" data-scroll>About Us</a>
+      <a href="contact.html" class="side-link">Contact Us</a>
+      <a href="browse.html?saved=1" class="side-link side-saved">Saved Homes
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="side-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="badge saved-badge" id="saved-badge-menu"></span>
+      </a>
+      <a href="client.html" class="side-link">My Dashboard</a>
+      <button class="side-link side-login" data-open-modal="login">Login / Sign Up</button>
+    </nav>
+    <div class="sidebar-social">
+      <span class="social-label">Follow us</span>
+      <div class="social-row">
+        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg></a>
+        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+        <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V9h4v1.5A6 6 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://wa.me/15551234567" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-content container">
+      <h1 class="hero-title">Find the Perfect Place to Call Home</h1>
+      <p class="hero-sub">Browse thousands of verified homes for sale and rent across your favorite neighborhoods.</p>
+
+      <form class="search-box" id="hero-search-form">
+        <span class="search-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </span>
+        <input type="text" id="hero-search" autocomplete="off" placeholder="Search by city..." aria-label="Search homes">
+        <button type="submit" class="btn btn-primary btn-search">Search</button>
+      </form>
+
+      <div class="chips">
+        <a class="chip chip-active" href="browse.html">Buy</a>
+        <a class="chip" href="browse.html?status=rent">Rent</a>
+        <a class="chip" href="#services" data-scroll data-tab="sell">Sell</a>
+        <a class="chip" href="browse.html?category=luxury">Luxury</a>
+        <a class="chip" href="browse.html?category=commercial">Commercial</a>
+      </div>
+    </div>
+
+    <!-- Featured homes strip -->
+    <div class="featured-strip">
+      <div class="container">
+        <div class="featured-head">
+          <h2 class="featured-title">Featured Homes</h2>
+          <div class="carousel-nav">
+            <button class="icon-btn" id="carousel-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+            <button class="icon-btn" id="carousel-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+          </div>
+        </div>
+        <div class="carousel" id="featured-carousel"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Welcome -->
+  <section class="welcome container section" id="welcome">
+    <div class="welcome-inner">
+      <div class="welcome-media">
+        <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=900&q=70" alt="Beautiful home interior" loading="lazy">
+        <img class="welcome-media-2" src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=600&q=70" alt="Modern kitchen" loading="lazy">
+      </div>
+      <div class="welcome-copy">
+        <span class="eyebrow">Welcome to Realty Homes</span>
+        <h2 class="h2">Welcome Home</h2>
+        <p class="lead">We believe finding the perfect home should be exciting, simple, and stress-free. Whether you're buying your first house, selling your current property, or searching for the perfect rental, our experienced team is here to guide you every step of the way.</p>
+        <button class="btn btn-primary" data-scroll data-target="#agent">Learn More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meet your agent -->
+  <section class="agent section container" id="agent">
+    <div class="agent-card">
+      <div class="agent-photo">
+        <img id="agent-photo-img" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=70" alt="Sarah Mitchell, Senior Real Estate Advisor">
+        <div class="agent-online"><span class="dot"></span> Available now</div>
+      </div>
+      <div class="agent-info">
+        <span class="eyebrow">Meet Your Agent</span>
+        <h2 id="agent-name" class="h2">Sarah Mitchell</h2>
+        <p id="agent-title" class="agent-title">Senior Real Estate Advisor</p>
+        <p id="agent-intro" class="agent-intro">Sarah has helped hundreds of families find their perfect home across the region. Known for honest advice, tireless negotiation and a personal touch on every single deal.</p>
+        <div class="agent-actions">
+          <a id="agent-call" class="btn btn-soft" href="tel:+15551234567"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>
+          <a id="agent-wa" class="btn btn-whatsapp" href="https://wa.me/15551234567" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> WhatsApp</a>
+          <a id="agent-email" class="btn btn-soft" href="mailto:sarah@realtyhomes.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Email</a>
+        </div>
+        <div class="agent-stats">
+          <div class="stat"><strong id="agent-rating">4.9</strong><span>Customer rating</span></div>
+          <div class="stat"><strong id="agent-years">12</strong><span>Years experience</span></div>
+          <div class="stat"><strong id="agent-sold">340</strong><span>Homes sold</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Discover how we can help -->
+  <section class="services section" id="services">
+    <div class="container">
+      <div class="services-head">
+        <span class="eyebrow">Our Services</span>
+        <h2 class="h2">Discover How We Can Help You</h2>
+      </div>
+
+      <div class="toggle-wrap">
+        <div class="toggle" id="services-toggle">
+          <button class="toggle-btn active" data-tab="buy">Buy</button>
+          <button class="toggle-btn" data-tab="sell">Sell</button>
+          <button class="toggle-btn" data-tab="rent">Rent</button>
+          <span class="toggle-slider" id="toggle-slider"></span>
+        </div>
+      </div>
+
+      <!-- BUY -->
+      <div class="service-panel active" id="panel-buy">
+        <div class="cards-4">
+          <article class="service-card">
+            <div class="sc-icon">$</div>
+            <h3>Find how much you can afford</h3>
+            <p>Get a personalized budget estimate based on your income, savings and current expenses — in under a minute.</p>
+            <button class="btn btn-soft" data-open-modal="budget">Calculate Budget</button>
+          </article>
+          <article class="service-card">
+            <div class="sc-icon">%</div>
+            <h3>Understand your monthly costs</h3>
+            <p>See your true monthly payment including mortgage, property taxes, insurance and more.</p>
+            <button class="btn btn-soft" data-open-modal="mortgage">Mortgage Calculator</button>
+          </article>
+          <article class="service-card">
+            <div class="sc-icon">@</div>
+            <h3>Down Payment Assistance</h3>
+            <p>Explore grants, programs and government assistance that can help you buy with a lower down payment.</p>
+            <button class="btn btn-soft" data-open-modal="dpa">Learn More</button>
+          </article>
+          <article class="service-card">
+            <div class="sc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+            </div>
+            <h3>Home Buying Guide</h3>
+            <p>A step-by-step walkthrough of the buying process, from pre-approval to closing day.</p>
+            <button class="btn btn-soft" data-open-modal="buyGuide">Get the Guide</button>
+          </article>
+          <article class="service-card">
+            <div class="sc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <h3>Find an Agent</h3>
+            <p>Connect with specialists who know your neighborhood and negotiate on your side.</p>
+            <a class="btn btn-soft" href="#agent" data-scroll data-target="#agent">Find an Agent</a>
+          </article>
+        </div>
+      </div>
+
+      <!-- SELL -->
+      <div class="service-panel" id="panel-sell">
+        <div class="cards-4">
+          <article class="service-card">
+            <div class="sc-icon">$$</div>
+            <h3>Get Your Home Valued</h3>
+            <p>Receive a free, no-obligation valuation with a recommended listing price backed by local market data.</p>
+            <button class="btn btn-soft" data-open-modal="valuation">Get Free Valuation</button>
+          </article>
+          <article class="service-card">
+            <div class="sc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l4 10H4L8 2z"/><path d="M12 12v6"/><path d="M8 22h8"/><path d="M12 22v-4"/></svg>
+            </div>
+            <h3>Home Selling Tips</h3>
+            <p>Simple, proven improvements that boost appeal and add value before you list.</p>
+            <button class="btn btn-soft" data-open-modal="sellTips">Selling Tips</button>
+          </article>
+          <article class="service-card">
+            <div class="sc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="7"/><rect x="12" y="6" width="3" height="11"/><rect x="17" y="13" width="3" height="4"/></svg>
+            </div>
+            <h3>Market Analysis</h3>
+            <p>Understand current trends, pricing and demand in your neighborhood right now.</p>
+            <button class="btn btn-soft" data-open-modal="market">Market Analysis</button>
+          </article>
+          <article class="service-card">
+            <div class="sc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+            </div>
+            <h3>Sell Faster</h3>
+            <p>Our marketing strategy gets your home in front of more serious buyers, faster.</p>
+            <button class="btn btn-soft" data-open-modal="marketing">Sell Faster</button>
+          </article>
+          <article class="service-card">
+            <div class="sc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+            </div>
+            <h3>Book Consultation</h3>
+            <p>Talk one-on-one with our team about a tailored plan for selling your home.</p>
+            <button class="btn btn-soft" data-open-modal="consult">Book Consultation</button>
+          </article>
+        </div>
+      </div>
+
+      <!-- RENT -->
+      <div class="service-panel" id="panel-rent">
+        <div class="cards-4">
+          <article class="service-card">
+            <div class="sc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+            </div>
+            <h3>Find Rental Homes</h3>
+            <p>Browse verified rentals by neighborhood, budget and must-have amenities.</p>
+            <a class="btn btn-soft" href="browse.html?status=rent">Browse Rentals</a>
+          </article>
+          <article class="service-card">
+            <div class="sc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+            </div>
+            <h3>Tenant Guide</h3>
+            <p>Everything first-time and returning renters need to know about renting smart.</p>
+            <button class="btn btn-soft" data-open-modal="tenantGuide">Tenant Guide</button>
+          </article>
+          <article class="service-card">
+            <div class="sc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+            </div>
+            <h3>Rental Application Help</h3>
+            <p>Get your documents ready and improve your chances of approval the first time.</p>
+            <button class="btn btn-soft" data-open-modal="rentalApp">Application Help</button>
+          </article>
+          <article class="service-card">
+            <div class="sc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </div>
+            <h3>Lease Information</h3>
+            <p>Plain-English explanations of lease terms, deposits, renewals and your rights.</p>
+            <button class="btn btn-soft" data-open-modal="lease">Lease Info</button>
+          </article>
+          <article class="service-card">
+            <div class="sc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <h3>Moving Checklist</h3>
+            <p>A complete checklist to make your move organized and stress-free.</p>
+            <button class="btn btn-soft" data-open-modal="moving">Moving Checklist</button>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to action -->
+  <section class="cta section">
+    <div class="cta-bg" style="background-image:url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=70')"></div>
+    <div class="cta-overlay"></div>
+    <div class="container cta-content">
+      <h2 class="h2">Ready to Find Your Dream Home?</h2>
+      <p>Join thousands of happy homeowners and renters who found their perfect place with us.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="browse.html">Browse Homes</a>
+        <a class="btn btn-light" href="#agent" data-scroll data-target="#agent">Contact an Agent</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="f-brand">
+          <a href="index.html" class="logo logo-light">
+            <span class="logo-mark">R</span><span class="logo-text">Realty<span>Homes</span></span>
+          </a>
+          <p>Realty Homes is a modern real estate platform connecting buyers, sellers and renters with verified properties and trusted agents.</p>
+          <div class="social-row">
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V9h4v1.5A6 6 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="https://wa.me/15551234567" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
+          </div>
+        </div>
+        <div class="f-col">
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a>
+          <a href="browse.html">Buy</a>
+          <a href="browse.html?status=rent">Rent</a>
+          <a href="#services" data-scroll data-tab="sell">Sell</a>
+          <a href="#agent" data-scroll>Agents</a>
+          <a href="client.html">My Dashboard</a>
+          <a href="admin.html">Admin</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="f-col">
+          <h4>Services</h4>
+          <a href="browse.html">Property Buying</a>
+          <a href="#services" data-scroll data-tab="sell">Property Selling</a>
+          <a href="browse.html?status=rent">Rentals</a>
+          <a href="#services" data-scroll data-tab="buy" data-modal="mortgage">Mortgage Help</a>
+          <a href="#services" data-scroll data-tab="sell">Valuation</a>
+          <a href="browse.html?category=commercial">Commercial</a>
+        </div>
+        <div class="f-col">
+          <h4>Support</h4>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms</a>
+        </div>
+        <div class="f-col">
+          <h4>Contact</h4>
+          <a href="tel:+15551234567"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +1 (555) 123-4567</a>
+          <a href="mailto:hello@realtyhomes.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> hello@realtyhomes.com</a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> 500 Market Street, Riverside, CA</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="newsletter">
+          <h4>Newsletter</h4>
+          <p>Get new listings and market news in your inbox.</p>
+          <form class="newsletter-form" id="newsletter-form">
+            <input type="email" placeholder="Your email address" required aria-label="Email address">
+            <button class="btn btn-primary" type="submit">Subscribe</button>
+          </form>
+        </div>
+        <div class="f-map">
+          <iframe title="Office location map" src="https://www.openstreetmap.org/export/embed.html?bbox=-74.26%2C40.69%2C-74.22%2C40.72&amp;layer=mapnik" loading="lazy"></iframe>
+        </div>
+        <p class="copyright">© 2026 Realty Homes. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Shared modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-box" id="modal-box" role="dialog" aria-modal="true"></div>
+  </div>
+
+  <!-- Property details modal -->
+  <div class="modal" id="property-modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-property></div>
+    <div class="modal-box modal-lg" id="property-box" role="dialog" aria-modal="true"></div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="site.js"></script>
+</body>
+</html>
