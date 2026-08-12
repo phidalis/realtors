@@ -22,7 +22,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/></svg>
       </button>
       <a href="index.html" class="logo">
-        <span class="logo-mark">R</span><span class="logo-text">Realty<span>Homes</span></span>
+        <span class="logo-mark"><img src="realtor.jpeg" alt="Realty Homes"></span><span class="logo-text">Realty<span>Homes</span></span>
       </a>
       <div class="nav-right">
         <a href="browse.html" class="icon-btn nav-search" id="nav-search" aria-label="Search homes" title="Search homes">
@@ -32,7 +32,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           <span class="badge saved-badge" id="saved-badge"></span>
         </a>
-        <button class="btn btn-sm nav-login" data-open-modal="login">Login</button>
+        <a href="login.html" class="btn btn-sm nav-login">Login</a>
       </div>
     </nav>
   </header>
@@ -41,7 +41,7 @@
   <aside class="sidebar" id="sidebar" aria-label="Navigation menu">
     <div class="sidebar-head">
       <a href="index.html" class="logo">
-        <span class="logo-mark">R</span><span class="logo-text">Realty<span>Homes</span></span>
+        <span class="logo-mark"><img src="realtor.jpeg" alt="Realty Homes"></span><span class="logo-text">Realty<span>Homes</span></span>
       </a>
       <button class="icon-btn" id="sidebar-close" aria-label="Close menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -64,7 +64,7 @@
         <span class="badge saved-badge" id="saved-badge-menu"></span>
       </a>
       <a href="client.html" class="side-link">My Dashboard</a>
-      <button class="side-link side-login" data-open-modal="login">Login / Sign Up</button>
+      <a href="login.html" class="side-link side-login">Login / Sign Up</a>
     </nav>
     <div class="sidebar-social">
       <span class="social-label">Follow us</span>
@@ -328,7 +328,7 @@
       <div class="footer-grid">
         <div class="f-brand">
           <a href="index.html" class="logo logo-light">
-            <span class="logo-mark">R</span><span class="logo-text">Realty<span>Homes</span></span>
+            <span class="logo-mark"><img src="realtor.jpeg" alt="Realty Homes"></span><span class="logo-text">Realty<span>Homes</span></span>
           </a>
           <p>Realty Homes is a modern real estate platform connecting buyers, sellers and renters with verified properties and trusted agents.</p>
           <div class="social-row">
@@ -347,22 +347,7 @@
           <a href="#services" data-scroll data-tab="sell">Sell</a>
           <a href="#agent" data-scroll>Agents</a>
           <a href="client.html">My Dashboard</a>
-          <a href="admin.html">Admin</a>
           <a href="contact.html">Contact</a>
-        </div>
-        <div class="f-col">
-          <h4>Services</h4>
-          <a href="browse.html">Property Buying</a>
-          <a href="#services" data-scroll data-tab="sell">Property Selling</a>
-          <a href="browse.html?status=rent">Rentals</a>
-          <a href="#services" data-scroll data-tab="buy" data-modal="mortgage">Mortgage Help</a>
-          <a href="#services" data-scroll data-tab="sell">Valuation</a>
-          <a href="browse.html?category=commercial">Commercial</a>
-        </div>
-        <div class="f-col">
-          <h4>Support</h4>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms</a>
         </div>
         <div class="f-col">
           <h4>Contact</h4>
@@ -372,19 +357,23 @@
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <div class="newsletter">
-          <h4>Newsletter</h4>
-          <p>Get new listings and market news in your inbox.</p>
-          <form class="newsletter-form" id="newsletter-form">
-            <input type="email" placeholder="Your email address" required aria-label="Email address">
-            <button class="btn btn-primary" type="submit">Subscribe</button>
-          </form>
+      <div class="f-partners">
+        <span class="f-partners-label">Our Partners</span>
+        <div class="partners-row">
+          <img src="realtor.jpeg" alt="REALTOR">
+          <img src="equalhousing.jpeg" alt="Equal Housing Opportunity">
+          <img src="mls.jpeg" alt="MLS">
+          <img src="brokerage.jpeg" alt="Brokerage">
+          <img src="lpt.jpeg" alt="LPT">
         </div>
-        <div class="f-map">
-          <iframe title="Office location map" src="https://www.openstreetmap.org/export/embed.html?bbox=-74.26%2C40.69%2C-74.22%2C40.72&amp;layer=mapnik" loading="lazy"></iframe>
-        </div>
+      </div>
+
+      <div class="footer-legal">
         <p class="copyright">© 2026 Realty Homes. All rights reserved.</p>
+        <div class="f-legal-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms</a>
+        </div>
       </div>
     </div>
   </footer>
